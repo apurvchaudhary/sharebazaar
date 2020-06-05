@@ -1,6 +1,14 @@
-# ignore folder
-.idea
+# ignore file formats
+*.pyc
+*.sqlite3
+*.DS_Store
 
 # ignore files
+dump.rdb
 settings.py
 wsgi.py
+
+# ignore folders
+/.idea/
+static/
+# My gitignore file
