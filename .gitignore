@@ -1,0 +1,6 @@
+# ignore folder
+.idea
+
+# ignore files
+settings.py
+wsgi.py
