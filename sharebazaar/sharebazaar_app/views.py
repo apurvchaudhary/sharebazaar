@@ -1,3 +1,52 @@
 from django.shortcuts import render
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from django.core.cache import cache
 
-# Create your views here.
+from sharebazaar_app.utils import get_home_page_data, get_today_page_data,\
+    get_current_month_page_data, get_net_worth_page_data
+
+
+def response(data, code=status.HTTP_200_OK):
+    return Response(data=data, status=code)
+
+
+class HomePageView(APIView):
+
+    def get(self, request):
+        if "stock_home" in cache:
+            return render(request, template_name="home.html", context={"data": cache.get("stock_home")})
+        data = get_home_page_data()
+        cache.set("stock_home", data)
+        return render(request, template_name="home.html", context={"data": data})
+
+
+class DayPageView(APIView):
+
+    def get(self, request):
+        if "stock_today" in cache:
+            return render(request, template_name="day.html", context={"data": cache.get("stock_today")})
+        data = get_today_page_data()
+        cache.set("stock_today", data)
+        return render(request, template_name="day.html", context={"data": data})
+
+
+class MonthPageView(APIView):
+
+    def get(self, request):
+        if "stock_current_month" in cache:
+            return render(request, template_name="month.html", context={"data": cache.get("stock_current_month")})
+        data = get_current_month_page_data()
+        cache.set("stock_current_month", data)
+        return render(request, template_name="month.html", context={"data": data})
+
+
+class NetWorthPageView(APIView):
+
+    def get(self, request):
+        if "net_worth" in cache:
+            return render(request, template_name="networth.html", context={"data": cache.get("net_worth")})
+        data = get_net_worth_page_data()
+        cache.set("net_worth", data)
+        return render(request, template_name="networth.html", context={"data": data})
