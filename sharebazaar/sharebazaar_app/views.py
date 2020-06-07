@@ -1,18 +1,14 @@
 from django.shortcuts import render
-from rest_framework import status
-from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.core.cache import cache
 
+from rest_framework.permissions import IsAdminUser
 from sharebazaar_app.utils import get_home_page_data, get_today_page_data,\
     get_current_month_page_data, get_net_worth_page_data
 
 
-def response(data, code=status.HTTP_200_OK):
-    return Response(data=data, status=code)
-
-
 class HomePageView(APIView):
+    permission_classes = (IsAdminUser,)
 
     def get(self, request):
         if "stock_home" in cache:
@@ -23,6 +19,7 @@ class HomePageView(APIView):
 
 
 class DayPageView(APIView):
+    permission_classes = (IsAdminUser,)
 
     def get(self, request):
         if "stock_today" in cache:
@@ -33,6 +30,7 @@ class DayPageView(APIView):
 
 
 class MonthPageView(APIView):
+    permission_classes = (IsAdminUser,)
 
     def get(self, request):
         if "stock_current_month" in cache:
@@ -43,6 +41,7 @@ class MonthPageView(APIView):
 
 
 class NetWorthPageView(APIView):
+    permission_classes = (IsAdminUser,)
 
     def get(self, request):
         if "net_worth" in cache:

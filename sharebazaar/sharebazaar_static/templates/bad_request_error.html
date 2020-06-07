@@ -111,49 +111,7 @@ body {
 </div>
 <div style="margin-top:210px;padding:15px 15px 35px;font-size:30px">
     <br>
-    <h5 style="color:#ffbf80;">All Current Stocks (Position/Holdings)</h5>
-        <table style="width:60%;">
-            <tr>
-                <th>Stock Name</th>
-                <th>Units</th>
-                <th>Price(Buy)</th>
-                <th>Date(Buy)</th>
-            </tr>
-            {% for stock in data.non_exited_share %}
-            <tr>
-                <td>{{stock.name}}</td>
-                <td style="color:#ff4dff;">{{stock.units}}</td>
-                <td style="color:blue;">{{stock.buy_price}}</td>
-                <td>{{stock.buy_date}}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    <br>
-    <h5 style="color:#ffbf80;">All Exited Stocks (Position/Holdings)</h5>
-        <table>
-            <tr>
-                <th>Stock Name</th>
-                <th>Units</th>
-                <th>Price(Buy)</th>
-                <th>Price(Sell)</th>
-                <th>Date(Buy)</th>
-                <th>Date(Sell)</th>
-                <th>Profit</th>
-                <th>Loss</th>
-            </tr>
-            {% for stock in data.exited_share %}
-            <tr>
-                <td>{{stock.name}}</td>
-                <td style="color:#ff4dff;">{{stock.units}}</td>
-                <td style="color:blue;">{{stock.buy_price}}</td>
-                <td>{{stock.sell_price}}</td>
-                <td>{{stock.buy_date}}</td>
-                <td>{{stock.sell_date}}</td>
-                <td style="color:#009900;">{{stock.profit}}</td>
-                <td style="color:red">{{stock.loss}}</td>
-            </tr>
-            {% endfor %}
-        </table>
+<h5 style="color:red">Sorry! Requested URL does not exists.</h5>
 </div>
 <br><br>
 <div style="float:left;margin-left:10px;"><a style="color:lightblue" href="{{MEDIA_URL}}/admin/" target="_self">MyAccount</a></div>

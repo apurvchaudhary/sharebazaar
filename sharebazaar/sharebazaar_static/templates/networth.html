@@ -141,25 +141,26 @@ body {
   </tr>
         <tr>
     <th style="background-color:#800000;">Total profit till date on Sold Stocks</th>
-    <td>{{data.total_profit}}</td>
+    <td>Rs. {{data.total_profit}}</td>
   </tr>
                 <tr>
     <th>Total loss till date on Sold Stocks</th>
-    <td>{{data.total_loss}}</td>
+    <td>Rs. {{data.total_loss}}</td>
   </tr>
                      <tr>
     <th style="background-color:#800000;">Net P/L till date on Sold Stocks</th>
                          {% if data.indicate == 1 %}
-                <td style="color:#009900;">{{data.net_pl}}</td>
+                <td style="color:#009900;">Rs. {{data.net_pl}}</td>
                 {% elif data.indicate == 2 %}
-                <td style="color:red;">{{data.net_pl}}</td>
+                <td style="color:red;">Rs. {{data.net_pl}}</td>
                 {% else %}
-                <td style="color:black;">{{data.net_pl}}</td>
+                <td style="color:black;">Rs. {{data.net_pl}}</td>
                 {% endif %}
   </tr>
 </table>
 </div>
 <br><br>
+<div style="float:left;margin-left:10px;"><a style="color:lightblue" href="{{MEDIA_URL}}/admin/" target="_self">MyAccount</a></div>
 <center><span style="color:grey;">All rights reserved for geeky@purv ©2020</span></center>
 <script>
 // When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size

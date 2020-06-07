@@ -9,6 +9,7 @@ settings.py
 wsgi.py
 
 # ignore folders
-/.idea/
+.idea/
 static/
+/__pycache__/
 # My gitignore file
