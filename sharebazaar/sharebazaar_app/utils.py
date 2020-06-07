@@ -5,8 +5,8 @@ from sharebazaar_app.serializers import ExitedStockSerializer, NonExitedStockSer
 
 
 def get_home_page_data():
-    exited_shares = Stock.objects.filter(sell_price__isnull=False).order_by("-created_at")
-    non_exited_shares = Stock.objects.filter(sell_price__isnull=True).order_by("-created_at")
+    exited_shares = Stock.objects.filter(sell_price__isnull=False).order_by("-buy_date")
+    non_exited_shares = Stock.objects.filter(sell_price__isnull=True).order_by("-buy_date")
     exited_share_serializer = ExitedStockSerializer(exited_shares, many=True)
     non_exited_share_serializer = NonExitedStockSerializer(non_exited_shares, many=True)
     data = {"exited_share" : exited_share_serializer.data, "non_exited_share" : non_exited_share_serializer.data}
@@ -38,9 +38,9 @@ def get_investment_returns_data(serialized_exited_stocks):
 
 
 def get_today_page_data():
-    exited_shares = Stock.objects.filter(sell_date=datetime.date.today()).order_by("-created_at")
+    exited_shares = Stock.objects.filter(sell_date=datetime.date.today()).order_by("-buy_date")
     non_exited_share = Stock.objects.filter(sell_date__isnull=True,
-                                            created_at__date=datetime.date.today()).order_by("-created_at")
+                                            buy_date=datetime.date.today()).order_by("-buy_date")
     exited_shares_serializer = ExitedStockSerializer(exited_shares, many=True)
     exited_shares_serializer_data = exited_shares_serializer.data
     non_exited_share_serializer = NonExitedStockSerializer(non_exited_share, many=True)
@@ -52,9 +52,9 @@ def get_today_page_data():
 
 
 def get_current_month_page_data():
-    exited_shares = Stock.objects.filter(sell_date__month=datetime.date.today().month).order_by("-created_at")
+    exited_shares = Stock.objects.filter(sell_date__month=datetime.date.today().month).order_by("-buy_date")
     non_exited_share = Stock.objects.filter(sell_date__isnull=True,
-                                            created_at__month=datetime.date.today().month).order_by("-created_at")
+                                            buy_date__month=datetime.date.today().month).order_by("-buy_date")
     exited_shares_serializer = ExitedStockSerializer(exited_shares, many=True)
     exited_shares_serializer_data = exited_shares_serializer.data
     non_exited_share_serializer = NonExitedStockSerializer(non_exited_share, many=True)
@@ -66,9 +66,8 @@ def get_current_month_page_data():
 
 
 def get_net_worth_page_data():
-    exited_shares = Stock.objects.filter(sell_date__isnull=False).order_by("-created_at")
-    non_exited_share = Stock.objects.filter(sell_date__isnull=True,
-                                            created_at__month=datetime.date.today().month).order_by("-created_at")
+    exited_shares = Stock.objects.filter(sell_date__isnull=False)
+    non_exited_share = Stock.objects.filter(sell_date__isnull=True, created_at__month=datetime.date.today().month)
     exited_shares_serializer = ExitedStockSerializer(exited_shares, many=True)
     non_exited_share_serializer = NonExitedStockSerializer(non_exited_share, many=True)
     exited_shares_serializer_data = exited_shares_serializer.data
@@ -96,4 +95,38 @@ def get_net_worth_page_data():
         "total_investment_in_holding" : total_investment_in_holding,
         "total_investment_till_date" : total_investment_till_date,
         **investment_returns_data}
+    return data
+
+def get_requested_month_data(month_and_year_str):
+    month_year = month_and_year_str.split("-")
+    month, year = int(month_year[1]), int(month_year[0])
+    exited_shares = Stock.objects.filter(sell_date__month=month, sell_date__year=year).order_by("-buy_date")
+    non_exited_share = Stock.objects.filter(sell_date__isnull=True, buy_date__month=month,
+                                            buy_date__year=year).order_by("-buy_date")
+    exited_shares_serializer = ExitedStockSerializer(exited_shares, many=True)
+    exited_shares_serializer_data = exited_shares_serializer.data
+    non_exited_share_serializer = NonExitedStockSerializer(non_exited_share, many=True)
+    investment_returns_data = get_investment_returns_data(exited_shares_serializer.data)
+    data = {"exited_share": exited_shares_serializer_data,
+            "non_exited_share": non_exited_share_serializer.data,
+            "particular" : month_and_year_str,
+            "type" : "Month",
+            **investment_returns_data}
+    return data
+
+def get_requested_date_data(date):
+    date_obj = datetime.datetime.strptime(date, "%Y-%m-%d").date()
+    if date_obj > datetime.date.today():
+        return
+    exited_shares = Stock.objects.filter(sell_date=date_obj).order_by("-buy_date")
+    non_exited_share = Stock.objects.filter(sell_date__isnull=True, buy_date=date_obj).order_by("-buy_date")
+    exited_shares_serializer = ExitedStockSerializer(exited_shares, many=True)
+    exited_shares_serializer_data = exited_shares_serializer.data
+    non_exited_share_serializer = NonExitedStockSerializer(non_exited_share, many=True)
+    investment_returns_data = get_investment_returns_data(exited_shares_serializer.data)
+    data = {"exited_share": exited_shares_serializer_data,
+            "non_exited_share": non_exited_share_serializer.data,
+            "particular": date,
+            "type": "Date",
+            **investment_returns_data}
     return data

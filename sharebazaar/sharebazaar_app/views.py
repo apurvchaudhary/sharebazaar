@@ -4,7 +4,7 @@ from django.core.cache import cache
 
 from rest_framework.permissions import IsAdminUser
 from sharebazaar_app.utils import get_home_page_data, get_today_page_data,\
-    get_current_month_page_data, get_net_worth_page_data
+    get_current_month_page_data, get_net_worth_page_data, get_requested_month_data, get_requested_date_data
 
 
 class HomePageView(APIView):
@@ -49,3 +49,18 @@ class NetWorthPageView(APIView):
         data = get_net_worth_page_data()
         cache.set("net_worth", data)
         return render(request, template_name="networth.html", context={"data": data})
+
+
+class FilterPageView(APIView):
+    permission_classes = (IsAdminUser,)
+
+    def get(self, request):
+        month_and_year = request.query_params.get("month")
+        date = request.query_params.get("date")
+        if month_and_year:
+            data = get_requested_month_data(month_and_year)
+            return render(request, template_name="filters.html", context={"data": data})
+        elif date:
+            data = get_requested_date_data(date)
+            return render(request, template_name="filters.html", context={"data": data})
+        return render(request, template_name="filters.html")

@@ -2,6 +2,7 @@
 {% load static %}
 <html>
 <head>
+    <title>Filters</title>
     <meta content="width=device-width, initial-scale=0" name="viewport">
     <style>
 table {
@@ -96,6 +97,7 @@ body {
     float: none;
   }
 }
+
 .navbar {
   margin-left:75%;
   overflow: hidden;
@@ -131,7 +133,6 @@ body {
 <body>
 <div id="navbar">
     <a href="{% url 'home' %}" id="logo">My Stock Exchanges</a>
-    <span style="position:fixed;margin-top:15px;margin-left:33%;font-size:20px;color:#ffbf80;"><b>{{data.date}}</b></span>
     <div id="navbar-right">
         <a style="color:white;" href="{% url 'home' %}">Home</a>
         <a style="color:white;" href="{% url 'day' %}">Day(P/L)</a>
@@ -140,7 +141,20 @@ body {
     </div>
 </div>
 <div style="margin-top:210px;padding:15px 15px 35px;font-size:30px">
-    <h5 style="color:#ffbf80;">Today Profit/Loss</h5>
+    <br>
+    <form action="{% url 'filters' %}">
+  <label style="color:grey;" for="month">Monthly Stock Exchanges </label>
+  <input type="month" id="month" name="month">
+  <input type="submit">
+</form>
+    <span style="margin-left:20%;">OR</span>
+<form action="{% url 'filters' %}">
+  <label style="color:grey;" for="date">Dates Stock Exchanges </label>
+  <input type="date" id="date" name="date">
+  <input type="submit">
+</form>
+    {% if data %}
+    <h5 style="color:#ffbf80;">{{data.type}} <span style="color:grey;">{{data.particular}}</span> Profit/Loss</h5>
         <table style="width:75%;">
             <tr>
                 <th>Date</th>
@@ -166,7 +180,7 @@ body {
             </tr>
         </table>
     <br>
-    <h5 style="color:#ffbf80;">Today Stocks (Position/Holdings)</h5>
+    <h5 style="color:#ffbf80;">{{data.type}} <span style="color:grey;">{{data.particular}}</span> Current Stocks (Position/Holdings)</h5>
         <table style="width:60%;">
             <tr>
                 <th>Stock Name</th>
@@ -184,7 +198,7 @@ body {
             {% endfor %}
         </table>
     <br>
-    <h5 style="color:#ffbf80;">Today Exited Stocks (Position/Holdings)</h5>
+    <h5 style="color:#ffbf80;">{{data.type}} <span style="color:grey;">{{data.particular}}</span> Exited Stocks (Position/Holdings)</h5>
         <table>
             <tr>
                 <th>Stock Name</th>
@@ -209,9 +223,9 @@ body {
             </tr>
             {% endfor %}
         </table>
+    {% endif %}
 </div>
 <br><br>
-<center><span style="color:grey;">All rights reserved for geeky@purv ©2020</span></center>
 <div class="navbar">
   <a href="{% url 'filters' %}">Sortings</a>
   <a href="{% url 'filters' %}">Months</a>
