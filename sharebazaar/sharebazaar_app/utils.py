@@ -187,11 +187,9 @@ def get_sorting_data(entity, type):
             non_exited_share = Stock.objects.filter(sell_date__isnull=True)
             non_exited_share_serializer = NonExitedStockSerializer(non_exited_share, many=True)
             if type == "lowtohigh":
-                exited_shares_serializer_data = sort_by_entity(exited_shares_serializer.data, "units" ,"lh")
-                return {"exited_share": exited_shares_serializer_data,
-                        "non_exited_share": non_exited_share_serializer.data}
+                return {"exited_share": sort_by_entity(exited_shares_serializer.data, "units" ,"lh"),
+                        "non_exited_share": sort_by_entity(non_exited_share_serializer.data, "units", "lh")}
             elif type == "hightolow":
-                exited_shares_serializer_data = sort_by_entity(exited_shares_serializer.data, "units", "hl")
-                return {"exited_share": exited_shares_serializer_data,
-                        "non_exited_share": non_exited_share_serializer.data}
+                return {"exited_share": sort_by_entity(exited_shares_serializer.data, "units", "hl"),
+                        "non_exited_share": sort_by_entity(non_exited_share_serializer.data, "units", "hl")}
     return None
