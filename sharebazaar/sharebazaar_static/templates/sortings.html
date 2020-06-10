@@ -2,7 +2,7 @@
 {% load static %}
 <html>
 <head>
-    <title>Home {{data.date}}</title>
+    <title>Sortings</title>
     <meta content="width=device-width, initial-scale=0" name="viewport">
     <style>
 table {
@@ -127,13 +127,56 @@ body {
   background-color: #4CAF50;
   color: white;
 }
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+  color:grey;
+}
 
+input[type=submit] {
+  background-color: grey;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 14%;
+}
+
+input[type=submit]:hover {
+  background-color: #800000;
+}
+
+.col-25 {
+  margin-left: 10%;
+  float: left;
+}
+
+.col-75 {
+  float: left;
+  margin-top: 12px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
     </style>
 </head>
 <body>
 <div id="navbar">
     <a href="{% url 'home' %}" id="logo">My Stock Exchanges</a>
-    <span style="position:fixed;margin-top:15px;margin-left:31%;font-size:20px;color:#ffbf80;"><b>{{data.date}}</b></span>
     <div id="navbar-right">
         <a style="color:white;" href="{% url 'home' %}">Home</a>
         <a style="color:white;" href="{% url 'day' %}">Day(P/L)</a>
@@ -141,7 +184,43 @@ body {
         <a style="color:white;" href="{% url 'networth' %}">Net Worth</a>
     </div>
 </div>
-<div style="margin-top:210px;padding:15px 15px 35px;font-size:30px">
+<div style="padding:15px 15px 35px;font-size:30px">
+</div>
+<div style="font-size:25px;margin-top:15%;">
+  <form action="{% url 'sortings' %}">
+  <div class="row">
+    <div class="col-25">
+      <label for="entity">What to Sort : </label>
+    </div>
+    <div class="col-75">
+      <select id="entity" name="entity">
+          <option>select entity</option>
+        <option value="profit">Profit</option>
+        <option value="loss">Loss</option>
+          <option value="units">Units</option>
+      </select>
+    </div>
+  </div>
+        <div class="row">
+    <div class="col-25">
+      <label for="type">Type of Sort : </label>
+    </div>
+    <div class="col-75">
+      <select id="type" name="type">
+          <option>select type</option>
+        <option value="lowtohigh">Low-high</option>
+        <option value="hightolow">High-low</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <input type="submit" value="Submit">
+  </div>
+  </form>
+    </div>
+<div style="padding:15px 15px 35px;font-size:30px">
+    <br>
+    {% if data.non_exited_share %}
     <h5 style="color:#ffbf80;">All Current Stocks (Position/Holdings)</h5>
         <table style="width:60%;">
             <tr>
@@ -159,7 +238,9 @@ body {
             </tr>
             {% endfor %}
         </table>
+    {% endif %}
     <br>
+    {% if data.exited_share %}
     <h5 style="color:#ffbf80;">All Exited Stocks (Position/Holdings)</h5>
         <table>
             <tr>
@@ -186,10 +267,11 @@ body {
             {% endfor %}
         </table>
 </div>
+{% endif %}
 <br><br>
-<center><span style="color:grey;">All rights reserved for geeky@purv ©2020</span></center>
+<center><span style="color:grey;font-size:16px;">All rights reserved for geeky@purv ©2020</span></center>
 <div class="navbar">
-  <a href="{% url 'sortings' %}">Sortings</a>
+  <a href="{% url 'filters' %}">Sortings</a>
   <a href="{% url 'filters' %}">History</a>
   <a href="{{MEDIA_URL}}/admin/" target="_self">MyAccount</a>
 </div>

@@ -42,11 +42,11 @@ class ExitedStockSerializer(serializers.ModelSerializer):
             return (obj.sell_price - obj.buy_price) * obj.units
         elif obj.sell_price and obj.sell_price == obj.buy_price:
             return 0
-        return None
+        return 0
 
     def get_loss(self, obj):
         if obj.sell_price and obj.sell_price < obj.buy_price:
             return (obj.buy_price - obj.sell_price) * obj.units
         elif obj.sell_price and obj.sell_price == obj.buy_price:
             return 0
-        return None
+        return 0

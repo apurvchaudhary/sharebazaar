@@ -1,10 +1,17 @@
 from django.shortcuts import render
+from rest_framework import status
+from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.core.cache import cache
 
 from rest_framework.permissions import IsAdminUser
 from sharebazaar_app.utils import get_home_page_data, get_today_page_data,\
-    get_current_month_page_data, get_net_worth_page_data, get_requested_month_data, get_requested_date_data
+    get_current_month_page_data, get_net_worth_page_data, get_sorting_data, get_requested_date_data,\
+    get_requested_month_data
+
+
+def response(data, code=status.HTTP_200_OK):
+    return Response(data=data, status=code)
 
 
 class HomePageView(APIView):
@@ -64,3 +71,15 @@ class FilterPageView(APIView):
             data = get_requested_date_data(date)
             return render(request, template_name="filters.html", context={"data": data})
         return render(request, template_name="filters.html")
+
+
+class SortingPageView(APIView):
+    permission_classes = (IsAdminUser,)
+
+    def get(self, request):
+        entity = request.query_params.get("entity")
+        type = request.query_params.get("type")
+        if entity and type:
+            data = get_sorting_data(entity, type)
+            return render(request, template_name="sortings.html", context={"data" : data})
+        return render(request, template_name="sortings.html")

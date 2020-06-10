@@ -2,10 +2,12 @@
 {% load static %}
 <html>
 <head>
+    <title>Networth {{data.date}}</title>
     <meta content="width=device-width, initial-scale=0" name="viewport">
     <style>
 table {
   border-collapse: collapse;
+  width: 75%;
 }
 
 th, td {
@@ -21,6 +23,7 @@ th {
   background-color: white;
   color: black;
 }
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -94,6 +97,7 @@ body {
     float: none;
   }
 }
+
 .navbar {
   margin-left:75%;
   overflow: hidden;
@@ -129,7 +133,7 @@ body {
 <body>
 <div id="navbar">
     <a href="{% url 'home' %}" id="logo">My Stock Exchanges</a>
-    <span style="position:fixed;margin-top:15px;margin-left:33%;font-size:20px;color:#ffbf80;"><b>{{data.date}}</b></span>
+    <span style="position:fixed;margin-top:15px;margin-left:31%;font-size:20px;color:#ffbf80;"><b>{{data.date}}</b></span>
     <div id="navbar-right">
         <a style="color:white;" href="{% url 'home' %}">Home</a>
         <a style="color:white;" href="{% url 'day' %}">Day(P/L)</a>
@@ -191,11 +195,11 @@ body {
 <br><br>
 <center><span style="color:grey;">All rights reserved for geeky@purv ©2020</span></center>
 <div class="navbar">
-  <a href="{% url 'filters' %}">Sortings</a>
-  <a href="{% url 'filters' %}">Months</a>
-    <a href="{% url 'filters' %}">Dates</a>
+  <a href="{% url 'sortings' %}">Sortings</a>
+  <a href="{% url 'filters' %}">History</a>
   <a href="{{MEDIA_URL}}/admin/" target="_self">MyAccount</a>
 </div>
+<br>
 <script>
 // When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
 window.onscroll = function() {scrollFunction()};
