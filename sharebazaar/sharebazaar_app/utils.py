@@ -133,6 +133,7 @@ def get_requested_date_data(date):
             "non_exited_share": non_exited_share_serializer.data,
             "particular": date,
             "type": "Date",
+            "requested_date" : date_obj.strftime("%d %b %Y"),
             **investment_returns_data}
     return data
 
