@@ -69,7 +69,7 @@ body {
 }
 
 #navbar a:hover {
-  background-color: grey;
+  background-color: #800000;
   color: black;
 }
 
@@ -119,13 +119,19 @@ body {
 }
 
 .navbar a:hover {
-  background: #f1f1f1;
-  color: black;
+  background: #800000;
+  color: white;
 }
 
 .navbar a.active {
   background-color: #4CAF50;
   color: white;
+}
+.submit_{
+    background-color: grey;
+}
+input[type=submit]:hover {
+  background-color: #800000;
 }
 
     </style>
@@ -134,104 +140,108 @@ body {
 <div id="navbar">
     <a href="{% url 'home' %}" id="logo">My Stock Exchanges</a>
     <div id="navbar-right">
-        <a style="color:white;" href="{% url 'home' %}">Home</a>
-        <a style="color:white;" href="{% url 'day' %}">Day(P/L)</a>
-        <a style="color:white;" href="{% url 'month' %}">Month(P/L)</a>
-        <a style="color:white;" href="{% url 'networth' %}">Net Worth</a>
+        <a href="{% url 'home' %}" style="color:white;">Home</a>
+        <a href="{% url 'day' %}" style="color:white;">Day(P/L)</a>
+        <a href="{% url 'month' %}" style="color:white;">Month(P/L)</a>
+        <a href="{% url 'networth' %}" style="color:white;">Net Worth</a>
     </div>
 </div>
 <div style="margin-top:210px;padding:15px 15px 35px;font-size:22px">
     <br>
     <form action="{% url 'filters' %}">
-  <label style="color:grey;" for="month">Monthly Stock Exchanges </label>
-  <input type="month" id="month" name="month">
-  <input type="submit">
-</form>
-    <span style="margin-left:20%;">OR</span>
-<form action="{% url 'filters' %}">
-  <label style="color:grey;" for="date">Dates Stock Exchanges </label>
-  <input type="date" id="date" name="date">
-  <input type="submit">
-</form>
+        <label for="month" style="color:#ffbf80;"><b>Monthly Stock Exchanges </b></label>
+        <input id="month" name="month" type="month">
+        <input class="submit_" type="submit">
+    </form>
+    <br>
+    <form action="{% url 'filters' %}">
+        <label for="date" style="color:#ffbf80;"><b>Datewise Stock Exchanges </b></label>
+        <input id="date" name="date" type="date">
+        <input class="submit_" type="submit">
+    </form>
     {% if data %}
-    <h5 style="color:#ffbf80;">{{data.type}} <span style="color:grey;">{{data.particular}}</span> Profit/Loss</h5>
-        <table style="width:75%;">
-            <tr>
-                <th>Date</th>
-                <th>Sold Stocks Investments</th>
-                <th>Sold Stocks Returns</th>
-                <th>Total Profit</th>
-                <th>Total Loss</th>
-                <th>Net P/L</th>
-            </tr>
-            <tr>
-                <td>{{data.requested_date}}</td>
-                <td style="color:blue;">{{data.total_sold_investment}}</td>
-                <td style="color:blue;">{{data.total_sold_returns}}</td>
-                <td style="color:#009900;;">{{data.total_profit}}</td>
-                <td style="color:red;">{{data.total_loss}}</td>
-                {% if data.indicate == 1 %}
-                <td style="color:#009900;">{{data.net_pl}}</td>
-                {% elif data.indicate == 2 %}
-                <td style="color:red;">{{data.net_pl}}</td>
-                {% else %}
-                <td style="color:black;">{{data.net_pl}}</td>
-                {% endif %}
-            </tr>
-        </table>
+    <h5 style="color:#ffbf80;">{{data.type}} <span style="color:red;">{{data.particular}}</span> Profit/Loss</h5>
+    <table style="width:75%;">
+        <tr>
+            <th>Date</th>
+            <th>Sold Stocks Investments</th>
+            <th>Sold Stocks Returns</th>
+            <th>Total Profit</th>
+            <th>Total Loss</th>
+            <th>Net P/L</th>
+        </tr>
+        <tr>
+            <td>{{data.requested_date}}</td>
+            <td style="color:blue;">{{data.total_sold_investment}}</td>
+            <td style="color:blue;">{{data.total_sold_returns}}</td>
+            <td style="color:#009900;;">{{data.total_profit}}</td>
+            <td style="color:red;">{{data.total_loss}}</td>
+            {% if data.indicate == 1 %}
+            <td style="color:#009900;">{{data.net_pl}}</td>
+            {% elif data.indicate == 2 %}
+            <td style="color:red;">{{data.net_pl}}</td>
+            {% else %}
+            <td style="color:black;">{{data.net_pl}}</td>
+            {% endif %}
+        </tr>
+    </table>
     <br>
-    <h5 style="color:#ffbf80;">{{data.type}} <span style="color:grey;">{{data.particular}}</span> Current Stocks (Position/Holdings)</h5>
-        <table style="width:60%;">
-            <tr>
-                <th>Stock Name</th>
-                <th>Units</th>
-                <th>Price(Buy)</th>
-                <th>Date(Buy)</th>
-            </tr>
-            {% for stock in data.non_exited_share %}
-            <tr>
-                <td>{{stock.name}}</td>
-                <td style="color:#ff4dff;">{{stock.units}}</td>
-                <td style="color:blue;">{{stock.buy_price}}</td>
-                <td>{{stock.buy_date}}</td>
-            </tr>
-            {% endfor %}
-        </table>
+    <h5 style="color:#ffbf80;">{{data.type}} <span style="color:red;">{{data.particular}}</span> Current Stocks
+        (Position/Holdings)</h5>
+    <table style="width:60%;">
+        <tr>
+            <th>Stock Name</th>
+            <th>Units</th>
+            <th>Price(Buy)</th>
+            <th>Date(Buy)</th>
+        </tr>
+        {% for stock in data.non_exited_share %}
+        <tr>
+            <td>{{stock.name}}</td>
+            <td style="color:#ff4dff;">{{stock.units}}</td>
+            <td style="color:blue;">{{stock.buy_price}}</td>
+            <td>{{stock.buy_date}}</td>
+        </tr>
+        {% endfor %}
+    </table>
     <br>
-    <h5 style="color:#ffbf80;">{{data.type}} <span style="color:grey;">{{data.particular}}</span> Exited Stocks (Position/Holdings)</h5>
-        <table>
-            <tr>
-                <th>Stock Name</th>
-                <th>Units</th>
-                <th>Price(Buy)</th>
-                <th>Price(Sell)</th>
-                <th>Date(Buy)</th>
-                <th>Date(Sell)</th>
-                <th>Profit</th>
-                <th>Loss</th>
-            </tr>
-            {% for stock in data.exited_share %}
-            <tr>
-                <td>{{stock.name}}</td>
-                <td style="color:#ff4dff;">{{stock.units}}</td>
-                <td style="color:blue;">{{stock.buy_price}}</td>
-                <td>{{stock.sell_price}}</td>
-                <td>{{stock.buy_date}}</td>
-                <td>{{stock.sell_date}}</td>
-                <td style="color:#009900;">{{stock.profit}}</td>
-                <td style="color:red">{{stock.loss}}</td>
-            </tr>
-            {% endfor %}
-        </table>
+    <h5 style="color:#ffbf80;">{{data.type}} <span style="color:red;">{{data.particular}}</span> Exited Stocks
+        (Position/Holdings)</h5>
+    <table>
+        <tr>
+            <th>Stock Name</th>
+            <th>Units</th>
+            <th>Price(Buy)</th>
+            <th>Price(Sell)</th>
+            <th>Date(Buy)</th>
+            <th>Date(Sell)</th>
+            <th>Profit</th>
+            <th>Loss</th>
+        </tr>
+        {% for stock in data.exited_share %}
+        <tr>
+            <td>{{stock.name}}</td>
+            <td style="color:#ff4dff;">{{stock.units}}</td>
+            <td style="color:blue;">{{stock.buy_price}}</td>
+            <td>{{stock.sell_price}}</td>
+            <td>{{stock.buy_date}}</td>
+            <td>{{stock.sell_date}}</td>
+            <td style="color:#009900;">{{stock.profit}}</td>
+            <td style="color:red">{{stock.loss}}</td>
+        </tr>
+        {% endfor %}
+    </table>
     {% endif %}
 </div>
 <br><br>
 <div class="navbar">
-  <a href="{% url 'sortings' %}">Sortings</a>
-  <a href="{% url 'filters' %}">History</a>
-  <a href="{{MEDIA_URL}}/admin/" target="_self">MyAccount</a>
+    <a href="{% url 'sortings' %}">Sortings</a>
+    <a href="{% url 'filters' %}">History</a>
+    <a href="{{MEDIA_URL}}/admin/" target="_self">MyAccount</a>
 </div>
-<br>
+<br><br>
+<span style="color:grey;font-size:16px;margin-left:10px;">All rights reserved for geeky@purv ©2020</span>
+<br><br>
 <script>
 // When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
 window.onscroll = function() {scrollFunction()};
@@ -245,6 +255,7 @@ function scrollFunction() {
     document.getElementById("logo").style.fontSize = "35px";
   }
 }
+
 </script>
 </body>
 </html>

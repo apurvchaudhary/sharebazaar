@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from sharebazaar_app.models import Stock
 
 
@@ -10,7 +11,7 @@ class NonExitedStockSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Stock
-        fields = ("id", "name", "buy_date","buy_price", "units")
+        fields = ("id", "name", "buy_date", "buy_price", "units")
 
     def get_buy_date(self, obj):
         return obj.buy_date.strftime("%-d %b %y")

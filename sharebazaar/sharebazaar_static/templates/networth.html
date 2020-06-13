@@ -69,7 +69,7 @@ body {
 }
 
 #navbar a:hover {
-  background-color: grey;
+  background-color: #800000;
   color: black;
 }
 
@@ -119,14 +119,15 @@ body {
 }
 
 .navbar a:hover {
-  background: #f1f1f1;
-  color: black;
+  background: #800000;
+  color: white;
 }
 
 .navbar a.active {
   background-color: #4CAF50;
   color: white;
 }
+
 
     </style>
 </head>
@@ -135,69 +136,70 @@ body {
     <a href="{% url 'home' %}" id="logo">My Stock Exchanges</a>
     <span style="position:fixed;margin-top:15px;margin-left:31%;font-size:20px;color:#ffbf80;"><b>{{data.date}}</b></span>
     <div id="navbar-right">
-        <a style="color:white;" href="{% url 'home' %}">Home</a>
-        <a style="color:white;" href="{% url 'day' %}">Day(P/L)</a>
-        <a style="color:white;" href="{% url 'month' %}">Month(P/L)</a>
-        <a style="color:white;" href="{% url 'networth' %}">Net Worth</a>
+        <a href="{% url 'home' %}" style="color:white;">Home</a>
+        <a href="{% url 'day' %}" style="color:white;">Day(P/L)</a>
+        <a href="{% url 'month' %}" style="color:white;">Month(P/L)</a>
+        <a href="{% url 'networth' %}" style="color:white;">Net Worth</a>
     </div>
 </div>
 <div style="margin-top:210px;padding:15px 15px 35px;font-size:22px">
-<br>
-    <table style="width:60%;" >
-  <tr>
-    <th>Total Investment Till Date</th>
-    <td style="color:lightblue;">{{data.total_investment_till_date}} INR</td>
-  </tr>
-          <tr>
-    <th style="background-color:#800000;">Investment in Sold Stocks</th>
-    <td style="color:blue;">{{data.total_sold_investment}} INR</td>
-  </tr>
-                <tr>
-    <th>Returns from Sold Stocks</th>
-    <td style="color:lightblue;">{{data.total_sold_returns}} INR</td>
-  </tr>
-          <tr>
-    <th style="background-color:#800000;">Investment in Holdings</th>
-    <td style="color:blue;">{{data.total_investment_in_holding}} INR</td>
-  </tr>
-                <tr>
-    <th>Total Stock Bought Till Date</th>
-    <td style="color:lightblue;">{{data.total_share_bought}}</td>
-  </tr>
-                        <tr>
-    <th style="background-color:#800000;">Total Stock Sold Till Date</th>
-    <td style="color:blue;">{{data.total_share_sold}}</td>
-  </tr>
-          <tr>
-    <th>Total Stock Holding Till Date</th>
-    <td style="color:lightblue;">{{data.total_share_holding}}</td>
-  </tr>
+    <br><br>
+    <table style="width:60%;">
         <tr>
-    <th style="background-color:#800000;">Total profit till date on Sold Stocks</th>
-    <td style="color:green;">{{data.total_profit}} INR</td>
-  </tr>
-                <tr>
-    <th>Total loss till date on Sold Stocks</th>
-    <td style="color:red;">{{data.total_loss}} INR</td>
-  </tr>
-                     <tr>
-    <th style="background-color:#800000;">Net P/L till date on Sold Stocks</th>
-                         {% if data.indicate == 1 %}
-                <td style="color:#009900;">{{data.net_pl}} INR</td>
-                {% elif data.indicate == 2 %}
-                <td style="color:red;">{{data.net_pl}} INR</td>
-                {% else %}
-                <td style="color:black;">{{data.net_pl}} INR</td>
-                {% endif %}
-  </tr>
-</table>
+            <th>Total Investment Till Date</th>
+            <td style="color:lightblue;">{{data.total_investment_till_date}} INR</td>
+        </tr>
+        <tr>
+            <th style="background-color:#800000;">Investment in Sold Stocks</th>
+            <td style="color:blue;">{{data.total_sold_investment}} INR</td>
+        </tr>
+        <tr>
+            <th>Returns from Sold Stocks</th>
+            <td style="color:lightblue;">{{data.total_sold_returns}} INR</td>
+        </tr>
+        <tr>
+            <th style="background-color:#800000;">Investment in Holdings</th>
+            <td style="color:blue;">{{data.total_investment_in_holding}} INR</td>
+        </tr>
+        <tr>
+            <th>Total Stock Bought Till Date</th>
+            <td style="color:lightblue;">{{data.total_share_bought}}</td>
+        </tr>
+        <tr>
+            <th style="background-color:#800000;">Total Stock Sold Till Date</th>
+            <td style="color:blue;">{{data.total_share_sold}}</td>
+        </tr>
+        <tr>
+            <th>Total Stock Holding Till Date</th>
+            <td style="color:lightblue;">{{data.total_share_holding}}</td>
+        </tr>
+        <tr>
+            <th style="background-color:#800000;">Total profit till date on Sold Stocks</th>
+            <td style="color:green;">{{data.total_profit}} INR</td>
+        </tr>
+        <tr>
+            <th>Total loss till date on Sold Stocks</th>
+            <td style="color:red;">{{data.total_loss}} INR</td>
+        </tr>
+        <tr>
+            <th style="background-color:#800000;">Net P/L till date on Sold Stocks</th>
+            {% if data.indicate == 1 %}
+            <td style="color:#009900;">{{data.net_pl}} INR</td>
+            {% elif data.indicate == 2 %}
+            <td style="color:red;">{{data.net_pl}} INR</td>
+            {% else %}
+            <td style="color:black;">{{data.net_pl}} INR</td>
+            {% endif %}
+        </tr>
+    </table>
 </div>
-<br><br>
-<center><span style="color:grey;">All rights reserved for geeky@purv ©2020</span></center>
+<br><br><br><br><br><br><br><br>
+<span style="color:grey;margin-left:10px;">All rights reserved for geeky@purv ©2020</span>
+<br>
 <div class="navbar">
-  <a href="{% url 'sortings' %}">Sortings</a>
-  <a href="{% url 'filters' %}">History</a>
-  <a href="{{MEDIA_URL}}/admin/" target="_self">MyAccount</a>
+    <a href="{% url 'sortings' %}">Sortings</a>
+    <a href="{% url 'filters' %}">History</a>
+    <a href="{{MEDIA_URL}}/admin/" target="_self">MyAccount</a>
 </div>
 <br>
 <script>
@@ -213,6 +215,7 @@ function scrollFunction() {
     document.getElementById("logo").style.fontSize = "35px";
   }
 }
+
 </script>
 </body>
 </html>

@@ -69,7 +69,7 @@ body {
 }
 
 #navbar a:hover {
-  background-color: grey;
+  background-color: #800000;
   color: black;
 }
 
@@ -98,26 +98,28 @@ body {
   }
 }
 
+
     </style>
 </head>
 <body>
 <div id="navbar">
     <a href="{% url 'home' %}" id="logo">My Stock Exchanges</a>
     <div id="navbar-right">
-        <a style="color:white;" href="{% url 'home' %}">Home</a>
-        <a style="color:white;" href="{% url 'day' %}">Day(P/L)</a>
-        <a style="color:white;" href="{% url 'month' %}">Month(P/L)</a>
-        <a style="color:white;" href="{% url 'networth' %}">Net Worth</a>
+        <a href="{% url 'home' %}" style="color:white;">Home</a>
+        <a href="{% url 'day' %}" style="color:white;">Day(P/L)</a>
+        <a href="{% url 'month' %}" style="color:white;">Month(P/L)</a>
+        <a href="{% url 'networth' %}" style="color:white;">Net Worth</a>
     </div>
 </div>
 <div style="margin-top:210px;padding:15px 15px 35px;font-size:30px">
     <br>
-<h5 style="color:red">Oh! oh! You are not authorized Person to this site yet.</h5>
-<h5 style="color:grey">Click <a style="color:blue" href="{{MEDIA_URL}}/admin/" target="_self">here</a> to login first.</h5>
-<h5 style="color:grey">For registration kindly contact admin (apurv.sirohi@gmail.com)</h5>
+    <h5 style="color:red">Oh! oh! You are not authorized Person to this site yet.</h5>
+    <h5 style="color:#ffbf80;">Click <a href="{{MEDIA_URL}}/admin/" style="color:blue" target="_self">here</a> to login
+        first.</h5>
+    <h5 style="color:#ffbf80;">For registration kindly contact admin (apurv.sirohi@gmail.com)</h5>
 </div>
 <br><br>
-<center><span style="color:grey;">All rights reserved for geeky@purv ©2020</span></center>
+<span style="color:grey;margin-left:10px;">All rights reserved for geeky@purv ©2020</span>
 <script>
 // When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
 window.onscroll = function() {scrollFunction()};
@@ -131,6 +133,7 @@ function scrollFunction() {
     document.getElementById("logo").style.fontSize = "35px";
   }
 }
+
 </script>
 </body>
 </html>

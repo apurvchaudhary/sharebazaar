@@ -1,7 +1,7 @@
 from django.urls import re_path
-from sharebazaar_app.views import HomePageView, DayPageView, MonthPageView, NetWorthPageView,\
-    FilterPageView, SortingPageView
 
+from sharebazaar_app.views import HomePageView, DayPageView, MonthPageView, NetWorthPageView, \
+    FilterPageView, SortingPageView
 
 urlpatterns = [
     re_path(r'^home/$', HomePageView.as_view(), name="home"),
