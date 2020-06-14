@@ -128,6 +128,7 @@ body {
   color: white;
 }
 
+
     </style>
 </head>
 <body>
@@ -135,64 +136,68 @@ body {
     <a href="{% url 'home' %}" id="logo">My Stock Exchanges</a>
     <span style="position:fixed;margin-top:15px;margin-left:31%;font-size:20px;color:#ffbf80;"><b>{{data.date}}</b></span>
     <div id="navbar-right">
-        <a style="color:white;" href="{% url 'home' %}">Home</a>
-        <a style="color:white;" href="{% url 'day' %}">Day(P/L)</a>
-        <a style="color:white;" href="{% url 'month' %}">Month(P/L)</a>
-        <a style="color:white;" href="{% url 'networth' %}">Net Worth</a>
+        <a href="{% url 'home' %}" style="color:white;">Home</a>
+        <a href="{% url 'day' %}" style="color:white;">Day(P/L)</a>
+        <a href="{% url 'month' %}" style="color:white;">Month(P/L)</a>
+        <a href="{% url 'networth' %}" style="color:white;">Net Worth</a>
     </div>
 </div>
 <div style="margin-top:210px;padding:15px 15px 35px;font-size:22px">
+    <h3 style="position:fixed;margin-left:81%;font-size:16px;color:#800000;">Welcome! <a href="{{MEDIA_URL}}/admin/"
+                                                                                         style="color:#ffbf80;"
+                                                                                         target="_self">{{username}}</a>
+    </h3>
     <h5 style="color:#ffbf80;">All Current Stocks (Position/Holdings)</h5>
-        <table style="width:60%;">
-            <tr>
-                <th>Stock Name</th>
-                <th>Units</th>
-                <th>Price(Buy)</th>
-                <th>Date(Buy)</th>
-            </tr>
-            {% for stock in data.non_exited_share %}
-            <tr>
-                <td>{{stock.name}}</td>
-                <td style="color:#ff4dff;">{{stock.units}}</td>
-                <td style="color:blue;">{{stock.buy_price}}</td>
-                <td>{{stock.buy_date}}</td>
-            </tr>
-            {% endfor %}
-        </table>
+    <table style="width:60%;">
+        <tr>
+            <th>Stock Name</th>
+            <th>Units</th>
+            <th>Price(Buy)</th>
+            <th>Date(Buy)</th>
+        </tr>
+        {% for stock in data.non_exited_share %}
+        <tr>
+            <td>{{stock.name}}</td>
+            <td style="color:#ff4dff;">{{stock.units}}</td>
+            <td style="color:blue;">{{stock.buy_price}}</td>
+            <td>{{stock.buy_date}}</td>
+        </tr>
+        {% endfor %}
+    </table>
     <br>
     <h5 style="color:#ffbf80;">All Exited Stocks (Position/Holdings)</h5>
-        <table>
-            <tr>
-                <th>Stock Name</th>
-                <th>Units</th>
-                <th>Price(Buy)</th>
-                <th>Price(Sell)</th>
-                <th>Date(Buy)</th>
-                <th>Date(Sell)</th>
-                <th>Profit</th>
-                <th>Loss</th>
-            </tr>
-            {% for stock in data.exited_share %}
-            <tr>
-                <td>{{stock.name}}</td>
-                <td style="color:#ff4dff;">{{stock.units}}</td>
-                <td style="color:blue;">{{stock.buy_price}}</td>
-                <td>{{stock.sell_price}}</td>
-                <td>{{stock.buy_date}}</td>
-                <td>{{stock.sell_date}}</td>
-                <td style="color:#009900;">{{stock.profit}}</td>
-                <td style="color:red">{{stock.loss}}</td>
-            </tr>
-            {% endfor %}
-        </table>
+    <table>
+        <tr>
+            <th>Stock Name</th>
+            <th>Units</th>
+            <th>Price(Buy)</th>
+            <th>Price(Sell)</th>
+            <th>Date(Buy)</th>
+            <th>Date(Sell)</th>
+            <th>Profit</th>
+            <th>Loss</th>
+        </tr>
+        {% for stock in data.exited_share %}
+        <tr>
+            <td>{{stock.name}}</td>
+            <td style="color:#ff4dff;">{{stock.units}}</td>
+            <td style="color:blue;">{{stock.buy_price}}</td>
+            <td>{{stock.sell_price}}</td>
+            <td>{{stock.buy_date}}</td>
+            <td>{{stock.sell_date}}</td>
+            <td style="color:#009900;">{{stock.profit}}</td>
+            <td style="color:red">{{stock.loss}}</td>
+        </tr>
+        {% endfor %}
+    </table>
 </div>
 <br><br>
 <span style="color:grey;margin-left:10px;">All rights reserved for geeky@purv ©2020</span>
 <br>
 <div class="navbar">
-  <a href="{% url 'sortings' %}">Sortings</a>
-  <a href="{% url 'filters' %}">History</a>
-  <a href="{{MEDIA_URL}}/admin/" target="_self">MyAccount</a>
+    <a href="{% url 'sortings' %}">Sortings</a>
+    <a href="{% url 'filters' %}">History</a>
+    <a href="{{MEDIA_URL}}/admin/" target="_self">MyAccount</a>
 </div>
 <br>
 <script>
@@ -208,6 +213,7 @@ function scrollFunction() {
     document.getElementById("logo").style.fontSize = "35px";
   }
 }
+
 </script>
 </body>
 </html>

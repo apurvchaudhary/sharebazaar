@@ -14,15 +14,20 @@ def response(data, code=status.HTTP_200_OK):
     return Response(data=data, status=code)
 
 
+def get_user_details(request):
+    return request.user.get_username()
+
+
 class HomePageView(APIView):
     permission_classes = (IsAdminUser,)
 
     def get(self, request):
         if "stock_home" in cache:
-            return render(request, template_name="home.html", context={"data": cache.get("stock_home")})
+            return render(request, template_name="home.html", context={"data": cache.get("stock_home"),
+                                                                       "username": get_user_details(request)})
         data = get_home_page_data()
         cache.set("stock_home", data)
-        return render(request, template_name="home.html", context={"data": data})
+        return render(request, template_name="home.html", context={"data": data, "username": get_user_details(request)})
 
 
 class DayPageView(APIView):
@@ -30,10 +35,11 @@ class DayPageView(APIView):
 
     def get(self, request):
         if "stock_today" in cache:
-            return render(request, template_name="day.html", context={"data": cache.get("stock_today")})
+            return render(request, template_name="day.html", context={"data": cache.get("stock_today"),
+                                                                      "username": get_user_details(request)})
         data = get_today_page_data()
         cache.set("stock_today", data)
-        return render(request, template_name="day.html", context={"data": data})
+        return render(request, template_name="day.html", context={"data": data, "username": get_user_details(request)})
 
 
 class MonthPageView(APIView):
@@ -41,10 +47,12 @@ class MonthPageView(APIView):
 
     def get(self, request):
         if "stock_current_month" in cache:
-            return render(request, template_name="month.html", context={"data": cache.get("stock_current_month")})
+            return render(request, template_name="month.html", context={"data": cache.get("stock_current_month"),
+                                                                        "username": get_user_details(request)})
         data = get_current_month_page_data()
         cache.set("stock_current_month", data)
-        return render(request, template_name="month.html", context={"data": data})
+        return render(request, template_name="month.html",
+                      context={"data": data, "username": get_user_details(request)})
 
 
 class NetWorthPageView(APIView):
@@ -52,10 +60,12 @@ class NetWorthPageView(APIView):
 
     def get(self, request):
         if "net_worth" in cache:
-            return render(request, template_name="networth.html", context={"data": cache.get("net_worth")})
+            return render(request, template_name="networth.html", context={"data": cache.get("net_worth"),
+                                                                           "username": get_user_details(request)})
         data = get_net_worth_page_data()
         cache.set("net_worth", data)
-        return render(request, template_name="networth.html", context={"data": data})
+        return render(request, template_name="networth.html",
+                      context={"data": data, "username": get_user_details(request)})
 
 
 class FilterPageView(APIView):
@@ -66,11 +76,13 @@ class FilterPageView(APIView):
         date = request.query_params.get("date")
         if month_and_year:
             data = get_requested_month_data(month_and_year)
-            return render(request, template_name="filters.html", context={"data": data})
+            return render(request, template_name="filters.html", context={"data": data,
+                                                                          "username": get_user_details(request)})
         elif date:
             data = get_requested_date_data(date)
-            return render(request, template_name="filters.html", context={"data": data})
-        return render(request, template_name="filters.html")
+            return render(request, template_name="filters.html", context={"data": data,
+                                                                          "username": get_user_details(request)})
+        return render(request, template_name="filters.html", context={"username": get_user_details(request)})
 
 
 class SortingPageView(APIView):
@@ -81,5 +93,6 @@ class SortingPageView(APIView):
         type = request.query_params.get("type")
         if entity and type:
             data = get_sorting_data(entity, type)
-            return render(request, template_name="sortings.html", context={"data": data})
-        return render(request, template_name="sortings.html")
+            return render(request, template_name="sortings.html", context={"data": data,
+                                                                           "username": get_user_details(request)})
+        return render(request, template_name="sortings.html", context={"username": get_user_details(request)})
