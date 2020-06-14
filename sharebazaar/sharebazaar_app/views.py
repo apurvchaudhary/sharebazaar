@@ -15,7 +15,7 @@ def response(data, code=status.HTTP_200_OK):
 
 
 def get_user_details(request):
-    return request.user.get_username()
+    return request.user.get_username().upper()
 
 
 class HomePageView(APIView):
