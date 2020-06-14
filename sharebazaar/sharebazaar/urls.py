@@ -18,6 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('share/', include('sharebazaar_app.urls')),
+    path('', include('sharebazaar_app.urls')),
 ]
 handler404 = "sharebazaar_app.exception_handlers.handler400"
