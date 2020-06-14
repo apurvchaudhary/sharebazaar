@@ -8,6 +8,7 @@
 table {
   border-collapse: collapse;
   width: 75%;
+  border: 1px solid black;
 }
 
 th, td {
@@ -130,6 +131,7 @@ body {
 
 
 
+
     </style>
 </head>
 <body>
@@ -145,10 +147,9 @@ body {
 </div>
 <div style="margin-top:210px;padding:15px 15px 35px;font-size:22px">
     <h3 style="position:fixed;margin-left:81%;font-size:16px;color:#800000;">Welcome! <a href="{{MEDIA_URL}}/admin/"
-                                                                                         style="color:#ffbf80;"
                                                                                          target="_self">{{username}}</a>
     </h3>
-    <h5 style="color:#ffbf80;">Today Profit/Loss</h5>
+    <h5 style="color:#ffbf80;">Today <span style="color:#000099">Profit/Loss</span></h5>
     <table style="width:75%;">
         <tr>
             <th>Date</th>
@@ -174,7 +175,7 @@ body {
         </tr>
     </table>
     <br>
-    <h5 style="color:#ffbf80;">Today Stocks (Position/Holdings)</h5>
+    <h5 style="color:#ffbf80;">Today Stocks <span style="color:#000099">(Position/Holdings)</span></h5>
     <table style="width:60%;">
         <tr>
             <th>Stock Name</th>
@@ -192,7 +193,7 @@ body {
         {% endfor %}
     </table>
     <br>
-    <h5 style="color:#ffbf80;">Today Exited Stocks (Position/Holdings)</h5>
+    <h5 style="color:#ffbf80;">Today Exited Stocks <span style="color:#000099">(Position/Holdings)</span></h5>
     <table>
         <tr>
             <th>Stock Name</th>
@@ -219,7 +220,7 @@ body {
     </table>
 </div>
 <br><br>
-<span style="color:grey;margin-left:10px;">All rights reserved for geeky@purv ©2020</span>
+<span style="margin-left:10px;font-size:11px;">All rights reserved for geeky@purv ©2020</span>
 <br>
 <div class="navbar">
     <a href="{% url 'sortings' %}">Sortings</a>
@@ -240,6 +241,7 @@ function scrollFunction() {
     document.getElementById("logo").style.fontSize = "35px";
   }
 }
+
 
 
 </script>

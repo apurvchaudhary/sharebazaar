@@ -8,6 +8,7 @@
 table {
   border-collapse: collapse;
   width: 75%;
+    border: 1px solid black;
 }
 
 th, td {
@@ -135,6 +136,7 @@ input[type=submit]:hover {
 }
 
 
+
     </style>
 </head>
 <body>
@@ -165,7 +167,8 @@ input[type=submit]:hover {
         <input class="submit_" type="submit">
     </form>
     {% if data %}
-    <h5 style="color:#ffbf80;">{{data.type}} <span style="color:red;">{{data.particular}}</span> Profit/Loss</h5>
+    <h5 style="color:#ffbf80;">{{data.type}} <span style="color:red;">{{data.particular}}</span> <span
+            style="color:#000099;">(Profit/Loss)</span></h5>
     <table style="width:75%;">
         <tr>
             <th>Date</th>
@@ -192,7 +195,7 @@ input[type=submit]:hover {
     </table>
     <br>
     <h5 style="color:#ffbf80;">{{data.type}} <span style="color:red;">{{data.particular}}</span> Current Stocks
-        (Position/Holdings)</h5>
+        <span style="color:#000099;">(Position/Holdings)</span></h5>
     <table style="width:60%;">
         <tr>
             <th>Stock Name</th>
@@ -211,7 +214,7 @@ input[type=submit]:hover {
     </table>
     <br>
     <h5 style="color:#ffbf80;">{{data.type}} <span style="color:red;">{{data.particular}}</span> Exited Stocks
-        (Position/Holdings)</h5>
+        <span style="color:#000099;">(Position/Holdings)</span></h5>
     <table>
         <tr>
             <th>Stock Name</th>
@@ -245,7 +248,7 @@ input[type=submit]:hover {
     <a href="{{MEDIA_URL}}/admin/" target="_self">MyAccount</a>
 </div>
 <br><br>
-<span style="color:grey;font-size:16px;margin-left:10px;">All rights reserved for geeky@purv ©2020</span>
+<span style="margin-left:10px;font-size:11px;">All rights reserved for geeky@purv ©2020</span>
 <br><br>
 <script>
 // When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
@@ -260,6 +263,7 @@ function scrollFunction() {
     document.getElementById("logo").style.fontSize = "35px";
   }
 }
+
 
 
 </script>

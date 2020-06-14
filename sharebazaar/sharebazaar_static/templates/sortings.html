@@ -8,6 +8,8 @@
 table {
   border-collapse: collapse;
   width: 75%;
+    border: 1px solid black;
+
 }
 
 th, td {
@@ -174,6 +176,7 @@ input[type=submit]:hover {
 }
 
 
+
     </style>
 </head>
 <body>
@@ -191,7 +194,6 @@ input[type=submit]:hover {
 <div style="font-size:22px;margin-top:13%;">
     <h3 style="position:fixed;margin-top:0.25%;margin-left:82.05%;font-size:16px;color:#800000;">Welcome! <a
             href="{{MEDIA_URL}}/admin/"
-            style="color:#ffbf80;"
             target="_self">{{username}}</a>
     </h3>
     <form action="{% url 'sortings' %}">
@@ -228,7 +230,7 @@ input[type=submit]:hover {
 <div style="padding:15px 15px 35px;font-size:22px">
     <br>
     {% if data.non_exited_share %}
-    <h5 style="color:#ffbf80;">All Current Stocks (Position/Holdings)</h5>
+    <h5 style="color:#ffbf80;">All Current Stocks <span style="color:#000099;">(Position/Holdings)</span></h5>
     <table style="width:60%;">
         <tr>
             <th>Stock Name</th>
@@ -248,7 +250,7 @@ input[type=submit]:hover {
     {% endif %}
     <br>
     {% if data.exited_share %}
-    <h5 style="color:#ffbf80;">All Exited Stocks (Position/Holdings)</h5>
+    <h5 style="color:#ffbf80;">All Exited Stocks<span style="color:#000099;">(Position/Holdings)</span></h5>
     <table>
         <tr>
             <th>Stock Name</th>
@@ -276,7 +278,7 @@ input[type=submit]:hover {
 </div>
 {% endif %}
 <br><br>
-<span style="color:grey;font-size:16px;margin-left:10px;">All rights reserved for geeky@purv ©2020</span>
+<span style="margin-left:10px;font-size:11px;">All rights reserved for geeky@purv ©2020</span>
 <br>
 <div class="navbar">
     <a href="{% url 'filters' %}">Sortings</a>
@@ -297,6 +299,7 @@ function scrollFunction() {
     document.getElementById("logo").style.fontSize = "35px";
   }
 }
+
 
 
 </script>

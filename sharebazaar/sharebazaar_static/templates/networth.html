@@ -8,6 +8,7 @@
 table {
   border-collapse: collapse;
   width: 75%;
+  border: 1px solid black;
 }
 
 th, td {
@@ -130,6 +131,7 @@ body {
 
 
 
+
     </style>
 </head>
 <body>
@@ -145,7 +147,6 @@ body {
 </div>
 <div style="margin-top:210px;padding:15px 15px 35px;font-size:22px">
     <h3 style="position:fixed;margin-left:81%;font-size:16px;color:#800000;">Welcome! <a href="{{MEDIA_URL}}/admin/"
-                                                                                         style="color:#ffbf80;"
                                                                                          target="_self">{{username}}</a>
     </h3>
     <br><br>
@@ -199,7 +200,7 @@ body {
     </table>
 </div>
 <br><br><br><br><br><br><br><br>
-<span style="color:grey;margin-left:10px;">All rights reserved for geeky@purv ©2020</span>
+<span style="margin-left:10px;font-size:11px;">All rights reserved for geeky@purv ©2020</span>
 <br>
 <div class="navbar">
     <a href="{% url 'sortings' %}">Sortings</a>
@@ -220,6 +221,7 @@ function scrollFunction() {
     document.getElementById("logo").style.fontSize = "35px";
   }
 }
+
 
 
 </script>
