@@ -1,10 +1,13 @@
 from django.core.cache import cache
 from django.shortcuts import render
+from django.views.decorators.cache import cache_page
 from rest_framework import status
+from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from sharebazaar.settings import CORONA_URL
 from sharebazaar_app.utils import get_home_page_data, get_today_page_data, \
     get_current_month_page_data, get_net_worth_page_data, get_sorting_data, get_requested_date_data, \
     get_requested_month_data
@@ -16,6 +19,12 @@ def response(data, code=status.HTTP_200_OK):
 
 def get_user_details(request):
     return request.user.get_username().upper()
+
+
+@api_view()
+@cache_page(60 * 60 * 720)
+def get_global_home_page(request):
+    return render(request, template_name="global.html", context={"corona_url" : CORONA_URL})
 
 
 class HomePageView(APIView):

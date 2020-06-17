@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>apurvchaudhary.site</title>
+    <meta content="width=device-width, initial-scale=0" name="viewport">
+    <style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: url("{% static 'sharebazaar_images/share_bg.jpg' %}");
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  background-attachment: fixed;
+  overflow: inherit;
+}
+
+#navbar {
+  overflow: hidden;
+  background-image: url("{% static 'sharebazaar_images/header_bg.jpg' %}");
+  background-size: cover;
+  padding: 90px 10px;
+  transition: 0.4s;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 99;
+}
+
+#navbar a {
+  float: left;
+  color: black;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+  border-style: solid;
+  border-color: white;
+  border-width: thin;
+}
+
+#navbar #logo {
+  font-size: 35px;
+  font-weight: bold;
+  transition: 0.4s;
+  background-color: grey;
+}
+
+#navbar a:hover {
+  background-color: #800000;
+  color: black;
+}
+
+#navbar a.active {
+  background-color: #8fc1e3;
+  color: black;
+}
+
+#navbar-right {
+  float: right;
+  margin-right: 80px;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 580px) {
+  #navbar {
+    padding: 20px 10px !important;
+  }
+  #navbar a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  #navbar-right {
+    float: none;
+  }
+}
+
+.navbar {
+  margin-left:75%;
+  overflow: hidden;
+  background-color: grey;
+  position: fixed;
+  bottom: 0;
+  width: 50%;
+  border-radius: 15px 0px;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 10px 12px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background: #800000;
+  color: white;
+}
+
+.navbar a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+
+.trans {
+  border-radius: 15px;
+  margin-top:20%;
+  width: 30%;
+  height: 30px;
+  background: #800000;
+  transition: width 1s;
+  color:grey;
+}
+
+.trans:hover {
+  width: 80%;
+}
+
+
+
+    </style>
+</head>
+<body>
+<div id="navbar">
+    <a href="{% url 'global-home' %}" id="logo">apurvchaudhary.site</a>
+    <div id="navbar-right">
+        <a href="{% url 'global-home' %}" style="color:white;">Home</a>
+        <a href="{% url 'home' %}" style="color:white;">Stock Accounting</a>
+        <a href="{% url 'networth' %}" style="color:white;">Corona Updates</a>
+    </div>
+</div>
+<h3 class="trans" style="padding-top:10px;padding-left:10px;"><a href="{% url 'home' %}" style="color:grey;">Click me to access stock accountings app.</a></h3>
+<h3 class="trans" style="padding-top:10px;padding-left:10px;margin-top:1%;background-color:grey;"><a href="{{corona_url}}" style="color:#800000;">Click me to access live corona updates.</a></h3>
+<h3 class="trans" style="padding-top:10px;padding-left:10px;margin-top:1%;"><a href="" style="color:grey;">Click me to access web development blogs.</a></h3>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<span style="margin-left:10px;font-size:11px;">All rights reserved for geeky@purv ©2020</span>
+<!--<script>-->
+<!--// When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size-->
+<!--window.onscroll = function() {scrollFunction()};-->
+
+<!--function scrollFunction() {-->
+<!--  if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {-->
+<!--    document.getElementById("navbar").style.padding = "10px 5px";-->
+<!--    document.getElementById("logo").style.fontSize = "25px";-->
+<!--  } else {-->
+<!--    document.getElementById("navbar").style.padding = "80px 10px";-->
+<!--    document.getElementById("logo").style.fontSize = "35px";-->
+<!--  }-->
+<!--}-->
+
+<!--</script>-->
+</body>
+</html>
